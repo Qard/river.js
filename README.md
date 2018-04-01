@@ -1,6 +1,6 @@
 # River.js
 
-River.js is a Node.js-like thing, expect focused on providing only lower-level
+River.js is a Node.js-like thing, except focused on providing only lower-level
 primitives and supporting only es modules.
 
 This is a work-in-progress. It's probably crashy and not usable for anything
