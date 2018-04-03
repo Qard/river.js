@@ -1,36 +1,25 @@
-function makeFriendly(value) {
-  return typeof value === 'string' ? value : JSON.stringify(value, null, 2)
-}
-
-function log(...args) {
-  print(...args.map(makeFriendly))
-}
-
 async function main () {
-  log('started')
-
-  log({ cwd })
-
-  log(constants)
-
-  print('wat')
-  const [ readFd, writeFd ] = await Promise.all([
-    open(cwd + '/test/hello.js', constants.RDONLY),
-    open(cwd + '/test/hello2.js', constants.WRONLY, constants.CREAT)
-  ])
   try {
-    const buf = await read(readFd, 1024)
-    const res = await write(writeFd, buf)
-    print({ res })
-  } catch (err) {
-    print(err.stack)
-  } finally {
-    await Promise.all([
-      close(readFd),
-      close(writeFd)
+    const [ readFd, writeFd ] = await Promise.all([
+      fs.open(cwd + '/test/hello.js', fs.constants.RDONLY),
+      fs.open(cwd + '/test/hello2.js', fs.constants.WRONLY | fs.constants.CREAT, 0o744)
     ])
-    log('closed the files')
+
+    try {
+      const buf = await fs.read(readFd, 1024)
+      const res = await fs.write(writeFd, buf)
+    } finally {
+      await Promise.all([
+        fs.close(readFd),
+        fs.close(writeFd)
+      ])
+    }
+  } catch(err) {
+    console.error(err.stack)
   }
 }
 
-main()
+main().then(
+  print.bind(null, 'success'),
+  print.bind(null, 'failure')
+)

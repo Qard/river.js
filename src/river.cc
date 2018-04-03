@@ -40,7 +40,12 @@ void River::main(int argc, char** argv) {
     // maybe use "global" for now?
     Local<Object> global = context->Global();
 
-    Fs::Init(global);
+    // Namespace fs functions in fs object
+    // TODO: This should be an es module instead,
+    // when I figure out how to make them natively.
+    auto fs = Object::New(isolate);
+    global->Set(String::NewFromUtf8(isolate, "fs"), fs);
+    Fs::Init(fs);
 
     global->SetAccessor(
       context,

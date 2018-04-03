@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unistd.h>
 
 #include <uv.h>
 #include <v8.h>
