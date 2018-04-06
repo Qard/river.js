@@ -1,0 +1,22 @@
+cxx_library(
+  name = 'uvv8',
+  header_namespace = 'uvv8',
+  exported_headers = subdir_glob([
+    ('include', '**/*.hh'),
+  ]),
+  srcs = glob([
+    'src/**/*.cc',
+  ]),
+  visibility = [
+    '//...',
+  ],
+  exported_linker_flags = [
+    '-luv',
+    '-lv8',
+    '-lv8_libplatform',
+    '-lv8_libbase'
+  ],
+  compiler_flags = [
+    '-std=c++1z',
+  ],
+)

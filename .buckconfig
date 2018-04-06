@@ -1,0 +1,9 @@
+[cxx]
+  cpp = /usr/bin/clang++
+  cppflags = -std=c++1z
+  cc = /usr/bin/clang
+  cflags = -std=c++1z
+  cxxpp = /usr/bin/clang++
+  cxxppflags = -std=c++1z
+  cxx = /usr/bin/clang++
+  cxxflags = -std=c++1z

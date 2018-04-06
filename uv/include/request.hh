@@ -4,4 +4,4 @@
 
 struct Request {
   int cancel();
-}
+};

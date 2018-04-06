@@ -9,7 +9,13 @@ usable eventually.
 
 ## Building
 
-You must have libuv 1.9+ and V8 6.5.x installed.
+You must have the following things installed before building:
+
+- [libuv](http://libuv.org/) 1.9+
+- [V8](https://chromium.googlesource.com/v8/v8.git) 6.5.x
+- [buck](https://buckbuild.com/)
+
+To build, simply do:
 
 ```sh
 make test

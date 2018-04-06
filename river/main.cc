@@ -1,4 +1,4 @@
-#include "river.hh"
+#include <river/river.hh>
 
 int main(int argc, char** argv) {
   auto river = new River();

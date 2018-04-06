@@ -5,7 +5,7 @@
 
 #include <v8.h>
 
-#include "util/check.hh"
+#include "uvv8/util/check.hh"
 
 //
 // Strings

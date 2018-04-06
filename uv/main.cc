@@ -1,5 +1,5 @@
 #include <vector>
-#include "uv/loop.hh"
+#include "uv/uv.hh"
 
 int main(int argc, char** argv) {
   auto loop = static_cast<Loop*>(uv_default_loop());

@@ -1,4 +1,4 @@
-#include "river.hh"
+#include <river/river.hh>
 
 using namespace v8;
 
@@ -18,10 +18,6 @@ void River::main(int argc, char** argv) {
   create_params.array_buffer_allocator = ArrayBuffer::Allocator::NewDefaultAllocator();
   Isolate* isolate = Isolate::New(create_params);
 
-  // ES Module loading hooks
-  // isolate->SetHostImportModuleDynamicallyCallback(HostImportModuleDynamically);
-  isolate->SetHostInitializeImportMetaObjectCallback(HostInitializeImportMetaObject);
-
   platform::EnsureEventLoopInitialized(platform.get(), isolate);
   {
     Isolate::Scope isolate_scope(isolate);
@@ -34,7 +30,7 @@ void River::main(int argc, char** argv) {
     // Run everything in a try/catch
     TryCatch try_catch(isolate);
 
-    InitializeModuleData(context);
+    Modules::Init(context);
 
     // TODO: Figure out where exports is coming from...
     // maybe use "global" for now?
@@ -47,29 +43,22 @@ void River::main(int argc, char** argv) {
     global->Set(String::NewFromUtf8(isolate, "fs"), fs);
     Fs::Init(fs);
 
+    // Add `cwd` property to global
+    // TODO: Find a better place for this?
     global->SetAccessor(
       context,
       String::NewFromUtf8(isolate, "cwd"),
-      [](Local< Name > property, const PropertyCallbackInfo< Value > &info) {
+      [](Local<Name> property, const PropertyCallbackInfo<Value> &info) {
         Isolate* isolate = Isolate::GetCurrent();
         HandleScope scope(isolate);
 
-        std::string cwd_string;
-        size_t size = 1024;
-        char buf[size];
-        if (uv_cwd(buf, &size) == UV_ENOBUFS) {
-          char buf2[size];
-          uv_cwd(buf2, &size);
-          cwd_string = buf2;
-        } else {
-          cwd_string = buf;
-        }
-
-        auto cwd = String::NewFromUtf8(isolate, cwd_string.c_str());
+        auto cwd = String::NewFromUtf8(isolate, GetWorkingDirectory().c_str());
         info.GetReturnValue().Set(cwd);
       }
-    );
+    ).ToChecked();
 
+    // Create global print function
+    // TODO: Create `console` object
     global->Set(
       String::NewFromUtf8(isolate, "print"),
       FunctionTemplate::New(isolate, [](const v8::FunctionCallbackInfo<Value>& args) {
@@ -91,9 +80,12 @@ void River::main(int argc, char** argv) {
       ? file_path
       : NormalizePath(file_path, GetWorkingDirectory());
 
+    // Run resolver
+    // ResolveRelative(file_path, GetWorkingDirectory());
+
     // Convert the result to an UTF8 string and print it.
     Local<Value> result;
-    if (!runModule(context, full_path).ToLocal(&result)) {
+    if (!Modules::runModule(context, full_path).ToLocal(&result)) {
       Throw(isolate, "failed to run module");
       return;
     }
@@ -106,6 +98,7 @@ void River::main(int argc, char** argv) {
     }
 
     uv_run(uv_default_loop(), UV_RUN_DEFAULT);
+    Modules::Dispose(context);
   }
   // Dispose the isolate and tear down V8.
   isolate->Dispose();
