@@ -11,7 +11,7 @@ usable eventually.
 
 You must have the following things installed before building:
 
-- [libuv](http://libuv.org/) 1.9+
+- [libuv](http://libuv.org/) 1.19+
 - [V8](https://chromium.googlesource.com/v8/v8.git) 6.5.x
 - [buck](https://buckbuild.com/)
 
