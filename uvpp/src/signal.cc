@@ -1,4 +1,4 @@
-#include "uv/signal.hh"
+#include "signal.hh"
 
 Signal::Signal(uv_loop_t* loop) {
   uv_signal_init(loop, this);

@@ -1571,7 +1571,9 @@ void Fs::Init(Local<Object> exports) {
   CONSTANT(O_NOFOLLOW)
   CONSTANT(O_SYNC)
   CONSTANT(O_DSYNC)
+  #ifdef O_SYMLINK
   CONSTANT(O_SYMLINK)
+  #endif
   #ifdef O_DIRECT
   CONSTANT(O_DIRECT)
   #endif

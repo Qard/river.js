@@ -1,9 +1,10 @@
 [cxx]
+  default_platform = linux-x86_64
   cpp = /usr/bin/clang++
-  cppflags = -std=c++1z
+  cppflags = -std=c++1z -fPIC
   cc = /usr/bin/clang
-  cflags = -std=c++1z
+  cflags = -std=c++1z -fPIC
   cxxpp = /usr/bin/clang++
-  cxxppflags = -std=c++1z
+  cxxppflags = -std=c++1z -fPIC
   cxx = /usr/bin/clang++
-  cxxflags = -std=c++1z
+  cxxflags = -std=c++1z -fPIC

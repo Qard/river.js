@@ -1,4 +1,4 @@
-#include "uv/loop.hh"
+#include "loop.hh"
 
 Loop::Loop() {
   uv_loop_init(this);

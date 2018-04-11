@@ -2,7 +2,7 @@
 
 #include <uv.h>
 
-#include "uv/handle.hh"
+#include "handle.hh"
 
 struct Check : public uv_check_t, public Handle {
   Check(uv_loop_t* loop);

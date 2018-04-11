@@ -2,7 +2,7 @@
 
 #include <uv.h>
 
-#include "uv/handle.hh"
+#include "handle.hh"
 
 struct Poll : public uv_poll_t, public Handle {
   Poll(uv_loop_t*, int);

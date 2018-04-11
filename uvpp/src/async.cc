@@ -1,4 +1,4 @@
-#include "uv/async.hh"
+#include "async.hh"
 
 Async::Async(uv_loop_t* loop, uv_async_cb callback) {
   uv_async_init(loop, this, callback);

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cassert>
+
 #ifndef DCHECK
 #define DCHECK(condition) assert(condition)
 #endif

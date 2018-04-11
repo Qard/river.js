@@ -2,16 +2,16 @@
 
 #include <uv.h>
 
-#include "uv/timer.hh"
-#include "uv/prepare.hh"
-#include "uv/check.hh"
-#include "uv/idle.hh"
-#include "uv/async.hh"
-#include "uv/poll.hh"
-#include "uv/signal.hh"
-#include "uv/process.hh"
-#include "uv/stream.hh"
-#include "uv/tcp.hh"
+#include "timer.hh"
+#include "prepare.hh"
+#include "check.hh"
+#include "idle.hh"
+#include "async.hh"
+#include "poll.hh"
+#include "signal.hh"
+#include "process.hh"
+#include "stream.hh"
+#include "tcp.hh"
 
 struct Timer;
 struct Prepare;

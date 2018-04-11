@@ -2,7 +2,7 @@
 
 #include <uv.h>
 
-#include "uv/handle.hh"
+#include "handle.hh"
 
 struct Stream : public Handle {
   int shutdown(uv_shutdown_t*, uv_shutdown_cb);

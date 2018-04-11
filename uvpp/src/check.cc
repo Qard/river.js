@@ -1,4 +1,4 @@
-#include "uv/check.hh"
+#include "check.hh"
 
 Check::Check(uv_loop_t* loop) {
   uv_check_init(loop, this);

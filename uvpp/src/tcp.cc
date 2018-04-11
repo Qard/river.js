@@ -1,4 +1,4 @@
-#include "uv/tcp.hh"
+#include "tcp.hh"
 
 TCP::TCP(uv_loop_t* loop, unsigned int flags) {
   if (flags != 0) {

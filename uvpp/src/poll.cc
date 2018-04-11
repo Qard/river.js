@@ -1,4 +1,4 @@
-#include "uv/poll.hh"
+#include "poll.hh"
 
 Poll::Poll(uv_loop_t* loop, int fd) {
   uv_poll_init(loop, this, fd);

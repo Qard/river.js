@@ -11,11 +11,11 @@ test: $(OUT)/gen/river/river
 	./$< test/hello.js
 
 # UV
-$(OUT)/gen/uv/uv-demo:
-	buck build //uv:uv-demo
+$(OUT)/gen/uvpp/uvpp-demo:
+	buck build //uvpp:uvpp-demo
 
-.PHONY: test-uv
-test-uv: $(OUT)/gen/uv/uv-demo
+.PHONY: test-uvpp
+test-uvpp: $(OUT)/gen/uvpp/uvpp-demo
 	./$<
 
 # Cleanup

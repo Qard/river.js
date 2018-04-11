@@ -4,8 +4,7 @@
 
 #include <uv.h>
 
-#include "uv/handle.hh"
-#include "uv/loop.hh"
+#include "handle.hh"
 
 struct Timer : public uv_timer_t, public Handle {
   Timer(uv_loop_t* loop);

@@ -1,3 +1,18 @@
+# Hack around issue with buck positioning linker flags incorrectly
+# (https://github.com/facebook/buck/issues/1443)
+prebuilt_cxx_library(
+  name = 'linker_flags',
+  header_only = True,
+  exported_linker_flags = [
+    # '-luv',
+    '-licuuc',
+    '-licui18n',
+    '-lv8_libbase',
+    '-lv8_libplatform',
+    '-lv8',
+  ],
+)
+
 cxx_library(
   name = 'uvv8',
   header_namespace = 'uvv8',
@@ -10,13 +25,11 @@ cxx_library(
   visibility = [
     '//...',
   ],
-  exported_linker_flags = [
-    '-luv',
-    '-lv8',
-    '-lv8_libplatform',
-    '-lv8_libbase'
-  ],
   compiler_flags = [
     '-std=c++1z',
   ],
+  deps = [
+    ':linker_flags',
+    '//deps/libuv:libuv'
+  ]
 )

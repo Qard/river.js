@@ -2,7 +2,7 @@
 
 #include <uv.h>
 
-#include "uv/handle.hh"
+#include "handle.hh"
 
 struct Prepare : public uv_prepare_t, public Handle {
   Prepare(uv_loop_t* loop);

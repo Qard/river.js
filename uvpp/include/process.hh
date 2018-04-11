@@ -1,10 +1,13 @@
 #pragma once
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <initializer_list>
 
 #include <uv.h>
 
-#include "uv/handle.hh"
+#include "handle.hh"
 
 struct ProcessOptions : public uv_process_options_t {
   ProcessOptions(std::initializer_list<const char*>);

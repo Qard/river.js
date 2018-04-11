@@ -1,4 +1,4 @@
-#include "uv/timer.hh"
+#include "timer.hh"
 
 Timer::Timer(uv_loop_t* loop) {
   uv_timer_init(loop, this);

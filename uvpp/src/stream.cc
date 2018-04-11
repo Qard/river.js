@@ -1,4 +1,4 @@
-#include "uv/stream.hh"
+#include "stream.hh"
 
 int Stream::shutdown(uv_shutdown_t* request, uv_shutdown_cb callback) {
   return uv_shutdown(request, reinterpret_cast<uv_stream_t*>(this), callback);

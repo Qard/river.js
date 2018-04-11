@@ -6,9 +6,8 @@ void River::main(int argc, char** argv) {
   // Initialize V8.
   V8::InitializeICUDefaultLocation(argv[0]);
   V8::InitializeExternalStartupData(argv[0]);
-  std::unique_ptr<Platform> platform = platform::NewDefaultPlatform(
-    0,
-    platform::IdleTaskSupport::kEnabled
+  std::unique_ptr<Platform> platform = std::unique_ptr<Platform>(
+    platform::CreateDefaultPlatform(0, platform::IdleTaskSupport::kEnabled)
   );
   V8::InitializePlatform(platform.get());
   V8::Initialize();

@@ -2,7 +2,7 @@
 
 #include <uv.h>
 
-#include "uv/handle.hh"
+#include "handle.hh"
 
 struct Signal : public uv_signal_t, public Handle {
   Signal(uv_loop_t*);

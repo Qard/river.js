@@ -1,5 +1,5 @@
 #include <vector>
-#include "uv/uv.hh"
+#include "uv.hh"
 
 int main(int argc, char** argv) {
   auto loop = static_cast<Loop*>(uv_default_loop());
@@ -80,10 +80,10 @@ int main(int argc, char** argv) {
   list[0].flags = UV_IGNORE;
   // stdout
   list[1].flags = UV_INHERIT_FD;
-  list[1].data.fd = 1;
+  list[1].data.file = 1;
   // stderr
   list[2].flags = UV_INHERIT_FD;
-  list[2].data.fd = 2;
+  list[2].data.file = 2;
 
   options->stdio_count = list.size();
   options->stdio = list.data();

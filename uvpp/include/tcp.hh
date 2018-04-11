@@ -2,8 +2,7 @@
 
 #include <uv.h>
 
-#include "uv/handle.hh"
-#include "uv/stream.hh"
+#include "stream.hh"
 
 struct TCP : public uv_tcp_t, public Stream {
   TCP(uv_loop_t*, unsigned int flags = 0);

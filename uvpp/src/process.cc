@@ -1,4 +1,4 @@
-#include "uv/process.hh"
+#include "process.hh"
 
 ProcessOptions::ProcessOptions(std::initializer_list<const char*> list) {
   memset(this, 0, sizeof(*this));

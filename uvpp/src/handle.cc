@@ -1,4 +1,4 @@
-#include "uv/handle.hh"
+#include "handle.hh"
 
 int Handle::is_active() {
   return uv_is_active(reinterpret_cast<uv_handle_t*>(this));
