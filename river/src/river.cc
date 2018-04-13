@@ -6,12 +6,15 @@ void River::main(int argc, char** argv) {
   // Initialize V8.
   V8::InitializeICUDefaultLocation(argv[0]);
   V8::InitializeExternalStartupData(argv[0]);
+
   std::unique_ptr<Platform> platform = std::unique_ptr<Platform>(
     platform::CreateDefaultPlatform(0, platform::IdleTaskSupport::kEnabled)
   );
+
   V8::InitializePlatform(platform.get());
   V8::Initialize();
   V8::SetFlagsFromCommandLine(&argc, argv, true);
+
   // Create a new Isolate and make it the current one.
   v8::Isolate::CreateParams create_params;
   create_params.array_buffer_allocator = ArrayBuffer::Allocator::NewDefaultAllocator();
