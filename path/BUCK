@@ -1,0 +1,16 @@
+cxx_library(
+  name = 'path',
+  header_namespace = 'path',
+  exported_headers = subdir_glob([
+    ('include', '**/*.hh'),
+  ]),
+  srcs = glob([
+    'src/**/*.cc',
+  ]),
+  visibility = [
+    '//...',
+  ],
+  compiler_flags = [
+    '-std=c++1z',
+  ],
+)

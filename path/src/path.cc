@@ -1,4 +1,4 @@
-#include "uvv8/util/path.hh"
+#include "path/path.hh"
 
 bool starts_with(const std::string &str, const std::string &suffix) {
   return str.size() >= suffix.size()
@@ -31,9 +31,9 @@ std::string GetWorkingDirectory() {
 
 // Returns the directory part of path, without the trailing '/'.
 std::string DirName(const std::string& path) {
-  DCHECK(IsAbsolutePath(path));
+  CHECK(IsAbsolutePath(path));
   size_t last_slash = path.find_last_of('/');
-  DCHECK(last_slash != std::string::npos);
+  CHECK(last_slash != std::string::npos);
   return path.substr(0, last_slash);
 }
 
@@ -42,7 +42,6 @@ std::string DirName(const std::string& path) {
 // and replacing backslashes with slashes).
 std::string NormalizePath(const std::string& path,
                           const std::string& dir_name) {
-
   std::cout << "normalizing path: " << path << ", dir: " << dir_name << std::endl;
   std::string result;
   if (IsAbsolutePath(path)) {
@@ -161,12 +160,3 @@ std::string NormalizePath(const std::string& path,
 //
 //   return nullptr;
 // }
-
-const std::string& ReadFile(const std::string& path) {
-  std::ifstream it(path.c_str());
-  const std::string* contents = new std::string(
-    (std::istreambuf_iterator<char>(it)),
-    std::istreambuf_iterator<char>()
-  );
-  return *contents;
-}
