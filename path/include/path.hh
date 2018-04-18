@@ -7,10 +7,13 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <cassert>
 
 #include <uv.h>
 
-#include "uvv8/util/check.hh"
+#ifndef CHECK
+#define CHECK(condition) assert(condition)
+#endif
 
 bool IsAbsolutePath(const std::string& path);
 
@@ -24,8 +27,6 @@ std::string DirName(const std::string& path);
 // and replacing backslashes with slashes).
 std::string NormalizePath(const std::string& path,
                           const std::string& dir_name);
-
-const std::string& ReadFile(const std::string& path);
 
 // const std::string ResolveRelative(const std::string& path,
 //                            const std::string& base,

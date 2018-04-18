@@ -3,6 +3,15 @@
 
 using namespace v8;
 
+const std::string& ReadFile(const std::string& path) {
+  std::ifstream it(path.c_str());
+  const std::string* contents = new std::string(
+    (std::istreambuf_iterator<char>(it)),
+    std::istreambuf_iterator<char>()
+  );
+  return *contents;
+}
+
 //
 // Private
 //

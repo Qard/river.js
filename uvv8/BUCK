@@ -30,6 +30,7 @@ cxx_library(
   ],
   deps = [
     ':linker_flags',
-    '//deps/libuv:libuv'
+    '//deps/libuv:libuv',
+    '//path:path'
   ]
 )
