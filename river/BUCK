@@ -15,6 +15,7 @@ cxx_library(
   ],
   compiler_flags = [
     '-std=c++1z',
+    '-I/usr/local/include'
   ],
 )
 
@@ -27,4 +28,11 @@ cxx_binary(
   deps = [
     ':libriver',
   ],
+  compiler_flags = [
+    '-std=c++1z',
+    '-I/usr/local/include'
+  ],
+  linker_flags = [
+    '-L/usr/local/lib'
+  ]
 )

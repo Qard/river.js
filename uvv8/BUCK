@@ -7,9 +7,9 @@ prebuilt_cxx_library(
     # '-luv',
     '-licuuc',
     '-licui18n',
+    '-lv8',
     '-lv8_libbase',
     '-lv8_libplatform',
-    '-lv8',
   ],
 )
 
@@ -27,6 +27,10 @@ cxx_library(
   ],
   compiler_flags = [
     '-std=c++1z',
+    '-I/usr/local/include'
+  ],
+  exported_linker_flags = [
+    '-I/usr/local/include'
   ],
   deps = [
     ':linker_flags',

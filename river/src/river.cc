@@ -3,24 +3,30 @@
 using namespace v8;
 
 void River::main(int argc, char** argv) {
+  // Create platform
+  std::unique_ptr<Platform> platform = platform::NewDefaultPlatform(0, platform::IdleTaskSupport::kEnabled);
+
+  // Create ArrayBuffer allocator
+  std::unique_ptr<ArrayBuffer::Allocator> array_buffer_allocator = std::unique_ptr<ArrayBuffer::Allocator>(
+    v8::ArrayBuffer::Allocator::NewDefaultAllocator()
+  );
+
   // Initialize V8.
   V8::InitializeICUDefaultLocation(argv[0]);
   V8::InitializeExternalStartupData(argv[0]);
-
-  std::unique_ptr<Platform> platform = std::unique_ptr<Platform>(
-    platform::CreateDefaultPlatform(0, platform::IdleTaskSupport::kEnabled)
-  );
-
   V8::InitializePlatform(platform.get());
   V8::Initialize();
   V8::SetFlagsFromCommandLine(&argc, argv, true);
 
   // Create a new Isolate and make it the current one.
   v8::Isolate::CreateParams create_params;
-  create_params.array_buffer_allocator = ArrayBuffer::Allocator::NewDefaultAllocator();
+  create_params.array_buffer_allocator = array_buffer_allocator.get();
   Isolate* isolate = Isolate::New(create_params);
 
+  // Start platform event loop on isolate
   platform::EnsureEventLoopInitialized(platform.get(), isolate);
+
+  // Run entrypoint in disposable scope
   {
     Isolate::Scope isolate_scope(isolate);
     // Create a stack-allocated handle scope.
@@ -32,6 +38,7 @@ void River::main(int argc, char** argv) {
     // Run everything in a try/catch
     TryCatch try_catch(isolate);
 
+    // Initialize module system
     Modules::Init(context);
 
     // TODO: Figure out where exports is coming from...
@@ -102,6 +109,7 @@ void River::main(int argc, char** argv) {
     uv_run(uv_default_loop(), UV_RUN_DEFAULT);
     Modules::Dispose(context);
   }
+
   // Dispose the isolate and tear down V8.
   isolate->Dispose();
   V8::Dispose();
